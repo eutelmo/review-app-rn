@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 
+import Navigator from './routes/drawer'
 import Home from "./screens/home";
 import * as Font from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
@@ -38,5 +39,5 @@ export default function App() {
     return null;
   }
 
-  return <Home />;
+  return <Navigator />;
 }
