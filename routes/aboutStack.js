@@ -1,25 +1,16 @@
-import { createStackNavigator } from "react-navigation-stack";
-import { createAppContainer } from "react-navigation";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 
 import About from "../screens/about";
 
-const screens = {
-  About: {
-    screen: About,
-    navigationOptions: {
-      title: "About",
-    },
-  },
-};
+const Stack = createStackNavigator();
 
-const AboutStack = createStackNavigator(screens, {
-  defaultNavigationOptions: {
-    headerTintColor: "#444",
-    headerStyles: {
-      backgroundColor: "#eee",
-      height: 60,
-    },
-  },
-});
-
-export default AboutStack;
+export default  function AboutStack() {
+  return (
+ 
+      <Stack.Navigator>
+        <Stack.Screen name="About" component={About} />
+      </Stack.Navigator>
+   
+  );
+}

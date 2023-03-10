@@ -1,15 +1,19 @@
 import { useState, useEffect, useCallback } from "react";
 
-import Navigator from './routes/drawer'
-import Home from "./screens/home";
 import * as Font from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 
-// const getFonts = () =>
-//   Font.loadAsync({
-//     "nunito-regular": require("./assets/fonts/NunitoSans-Regular.ttf"),
-//     "nunito-bold": require("./assets/fonts/NunitoSans-Bold.ttf"),
-//   });
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import { NavigationContainer } from "@react-navigation/native";
+
+import HomeStack from "./routes/homeStack";
+import AboutStack from "./routes/aboutStack";
+
+import Home from "./screens/home";
+import About from "./screens/about";
+import Review from "./screens/reviews";
+
+const Drawer = createDrawerNavigator();
 
 SplashScreen.preventAutoHideAsync();
 
@@ -23,7 +27,6 @@ export default function App() {
           "nunito-regular": require("./assets/fonts/NunitoSans-Regular.ttf"),
           "nunito-bold": require("./assets/fonts/NunitoSans-Bold.ttf"),
         });
-        // await new Promise((resolve) => setTimeout(resolve, 2000));
       } catch (e) {
         console.warn(e);
       } finally {
@@ -39,5 +42,14 @@ export default function App() {
     return null;
   }
 
-  return <Navigator />;
+  //  return <Navigator />;
+
+  return (
+    <NavigationContainer>
+      <Drawer.Navigator initialRouteName="Home">
+        <Drawer.Screen name="Home" component={HomeStack} />
+        <Drawer.Screen name="About" component={AboutStack} />
+      </Drawer.Navigator>
+    </NavigationContainer>
+  );
 }

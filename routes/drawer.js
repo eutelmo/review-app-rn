@@ -1,5 +1,6 @@
-import { createDrawerNavigator } from 'react-navigation-drawer';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createAppContainer } from 'react-navigation';
+import { NavigationContainer } from '@react-navigation/native';
 
 // stacks
 import HomeStack from './homeStack';

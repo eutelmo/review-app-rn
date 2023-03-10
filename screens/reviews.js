@@ -2,12 +2,14 @@ import React from "react";
 import { StyleSheet, View, Text, Button } from "react-native";
 import { globalStyles } from "../styles/global";
 
-export default function Review({ navigation }) {
+export default function Review({ route,navigation }) {
+
+  const { title,rating,body,key } = route.params;
   return (
     <View style={globalStyles.container}>
-      <Text>{navigation.getParam("title")}</Text>
-      <Text>{navigation.getParam("body")}</Text>
-      <Text>{navigation.getParam("rating")}</Text>
+      <Text>{JSON.stringify(title)}</Text>
+      <Text>{JSON.stringify(body)}</Text>
+      <Text>{JSON.stringify(rating)}</Text>
     </View>
   );
 }
