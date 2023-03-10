@@ -1,17 +1,54 @@
 import React from "react";
-import { StyleSheet, View, Text, Button } from "react-native";
-import { globalStyles } from "../styles/global";
+import {
+  StyleSheet,
+  View,
+  Text,
+  Button,
+  Image,
+  ScrollView,
+} from "react-native";
+import { globalStyles, images } from "../styles/global";
+import Card from "../shared/card";
 
-export default function Review({ route,navigation }) {
+export default function Review({ route, navigation }) {
+  const { title, rating, body, key } = route.params;
 
-  const { title,rating,body,key } = route.params;
   return (
-    <View style={globalStyles.container}>
-      <Text>{JSON.stringify(title)}</Text>
-      <Text>{JSON.stringify(body)}</Text>
-      <Text>{JSON.stringify(rating)}</Text>
-    </View>
+    <ScrollView>
+      <View style={globalStyles.container}>
+        <Card>
+          <Text style={styles.Title}>{JSON.stringify(title)}</Text>
+          <Text>{JSON.stringify(body)}</Text>
+          <View style={styles.rating}>
+            <Text style={styles.ratingTxt}>GameZone Rating:</Text>
+            <Image style={styles.ratingImage} source={images.ratings[rating]} />
+          </View>
+        </Card>
+
+        <Button
+          onPress={() => navigation.navigate("Home")}
+          title="Back to Home"
+          color="red"
+        />
+      </View>
+    </ScrollView>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  Title: {
+    fontWeight: "bold",
+    fontSize: 20,
+    marginBottom: 12,
+  },
+
+  rating: {
+    marginTop: 12,
+  },
+  ratingTxt: {
+    fontWeight: "bold",
+  },
+  ratingImage: {
+    marginTop: 5,
+  },
+});

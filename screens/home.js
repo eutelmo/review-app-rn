@@ -5,10 +5,16 @@ import {
   Text,
   FlatList,
   TouchableOpacity,
+  Modal,
 } from "react-native";
 import { globalStyles } from "../styles/global";
+import { MaterialIcons } from "@expo/vector-icons";
+
+import Card from "../shared/card";
 
 export default function Home({ navigation }) {
+  const [modalState, setModalState] = useState(false);
+
   const [reviews, setReviews] = useState([
     {
       title: "The Legend of Zelda: Breath of the Wild",
@@ -44,13 +50,36 @@ export default function Home({ navigation }) {
 
   return (
     <View style={globalStyles.container}>
+      {/**Modal */}
+      <Modal visible={modalState} animationType="slide">
+        <MaterialIcons
+          name="close"
+          size={30}
+          style={{ ...styles.modalToggle, ...styles.modalClose }}
+          onPress={() => setModalState(false)}
+        />
+        <View style={styles.modalBody}></View>
+      </Modal>
+
+      {/**Add Button*/}
+
+      <MaterialIcons
+        name="add"
+        size={40}
+        style={styles.modalToggle}
+        onPress={() => setModalState(true)}
+      />
+
+      {/**Game List*/}
       <FlatList
         data={reviews}
         renderItem={({ item }) => (
           <TouchableOpacity
             onPress={() => navigation.navigate("Reviews", item)}
           >
-            <Text style={globalStyles.titleText}>{item.title}</Text>
+            <Card>
+              <Text style={globalStyles.titleText}>{item.title}</Text>
+            </Card>
           </TouchableOpacity>
         )}
       />
@@ -58,4 +87,19 @@ export default function Home({ navigation }) {
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  modalToggle: {
+    marginBottom: 10,
+    // borderWidth: 10,
+    // borderColor: "#f2f2f2f2",
+    padding: 10,
+    alignSelf: "center",
+  },
+  modalClose: {
+    marginTop: 50,
+    marginBottom: 0,
+  },
+  modalContent: {
+    flex: 1,
+  },
+});
